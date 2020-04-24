@@ -18,6 +18,11 @@ namespace CPUNotify
         static readonly string SECTION_OPTION = "Option";
         static readonly string KEY_APP = "App";
         static readonly string KEY_ARG = "Arg";
+        static readonly string KEY_CHECKDURATION = "CheckDuration";
+        static readonly string KEY_MIN_CPUUSAGE = "MinCpuUsage";
+        static readonly string KEY_MAX_CPUUSAGE = "MaxCpuUsage";
+
+        static readonly string SECTION_LOCATION = "Location";
 
         float? _minCPUUsage;
         float? _maxCPUUsage;
@@ -30,6 +35,8 @@ namespace CPUNotify
         {
             InitializeComponent();
 
+            this.Text = Application.ProductName;
+
             // read ini
             HashIni ini = Profile.ReadAll(IniPath);
             string svalue;
@@ -37,6 +44,18 @@ namespace CPUNotify
             txtApp.Text = svalue;
             Profile.GetString(SECTION_OPTION, KEY_ARG, string.Empty, out svalue, ini);
             txtArg.Text = svalue;
+
+            AmbLib.LoadFormXYWH(this, SECTION_LOCATION, ini);
+
+            int intval;
+            if (Profile.GetInt(SECTION_OPTION, KEY_CHECKDURATION, 0, out intval, ini))
+                _checkDuration = intval;
+            float fval;
+            if (Profile.GetFloat(SECTION_OPTION, KEY_MIN_CPUUSAGE, 0, out fval, ini))
+                _minCPUUsage = fval;
+            if (Profile.GetFloat(SECTION_OPTION, KEY_MAX_CPUUSAGE, 0, out fval, ini))
+                _maxCPUUsage = fval;
+
 
             try
             {
@@ -78,8 +97,8 @@ namespace CPUNotify
 
         void OnAfterLoad(object sender, EventArgs e)
         {            // check options
-            if ((_minCPUUsage == null && _maxCPUUsage == null) ||
-                _checkDuration == null)
+            //if ((_minCPUUsage == null && _maxCPUUsage == null) ||
+            //    _checkDuration == null)
             {
                 using (var form = new FormNewInput())
                 {
@@ -91,6 +110,15 @@ namespace CPUNotify
                     _minCPUUsage = form.MinCpuUsage;
                     _maxCPUUsage = form.MaxCpuUsage;
                     _checkDuration = form.Duration;
+
+                    HashIni ini = Profile.ReadAll(IniPath);
+                    Profile.WriteInt(SECTION_OPTION, KEY_CHECKDURATION, form.Duration, ini);
+                    Profile.WriteFloat(SECTION_OPTION, KEY_MIN_CPUUSAGE, form.MinCpuUsage, ini);
+                    Profile.WriteFloat(SECTION_OPTION, KEY_MAX_CPUUSAGE, form.MaxCpuUsage, ini);
+                    if(!Profile.WriteAll(ini,IniPath))
+                    {
+                        MessageBox.Show("failed to save ini");
+                    }
                 }
             }
             if (_minCPUUsage == null)
@@ -172,7 +200,10 @@ namespace CPUNotify
             HashIni ini = Profile.ReadAll(iniPath);
             Profile.WriteString(SECTION_OPTION, KEY_APP, txtApp.Text, ini);
             Profile.WriteString(SECTION_OPTION, KEY_ARG, txtArg.Text, ini);
-            if(!Profile.WriteAll(ini,iniPath))
+
+            AmbLib.SaveFormXYWH(this, SECTION_LOCATION, ini);
+
+            if (!Profile.WriteAll(ini,iniPath))
             {
                 MessageBox.Show("ini save failed");
             }

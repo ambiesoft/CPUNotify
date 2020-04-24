@@ -126,6 +126,7 @@
             this.Controls.Add(this.udMax);
             this.Controls.Add(this.udMin);
             this.Name = "FormNewInput";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormNewInput";
             ((System.ComponentModel.ISupportInitialize)(this.udMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMax)).EndInit();
