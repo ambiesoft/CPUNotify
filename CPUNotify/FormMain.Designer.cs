@@ -41,6 +41,7 @@
             this.btnBrowseApp = new System.Windows.Forms.Button();
             this.btnBrowseArg = new System.Windows.Forms.Button();
             this.btnTestLaunch = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // timerMain
@@ -143,11 +144,22 @@
             this.btnTestLaunch.UseVisualStyleBackColor = true;
             this.btnTestLaunch.Click += new System.EventHandler(this.btnTestLaunch_Click);
             // 
+            // btnPause
+            // 
+            this.btnPause.Location = new System.Drawing.Point(100, 103);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(319, 23);
+            this.btnPause.TabIndex = 11;
+            this.btnPause.Text = "| |";
+            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(557, 347);
+            this.Controls.Add(this.btnPause);
             this.Controls.Add(this.btnTestLaunch);
             this.Controls.Add(this.btnBrowseArg);
             this.Controls.Add(this.btnBrowseApp);
@@ -182,6 +194,7 @@
         private System.Windows.Forms.Button btnBrowseApp;
         private System.Windows.Forms.Button btnBrowseArg;
         private System.Windows.Forms.Button btnTestLaunch;
+        private System.Windows.Forms.Button btnPause;
     }
 }
 

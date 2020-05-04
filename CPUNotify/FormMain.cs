@@ -174,6 +174,9 @@ namespace CPUNotify
 
         private void timerMain_Tick(object sender, EventArgs e)
         {
+            if (IsPaused())
+                return;
+
             float cpuPercent = getCPUCounter();
 
             txtCpuUsage.Text = string.Format("{0} Hits in consecutive {1} secs, current cpu '{2}%'",
@@ -265,6 +268,26 @@ namespace CPUNotify
             LaunchApp(false);
         }
 
-     
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            TogglePause();
+        }
+        bool IsPaused()
+        {
+            return btnPause.Tag is bool ? ((bool)(btnPause.Tag)) : false;
+        }
+        void TogglePause()
+        {
+            if (IsPaused())
+            {
+                btnPause.Tag = false;
+                btnPause.Text = " | | ";
+            }
+            else
+            {
+                btnPause.Tag = true;
+                btnPause.Text = " > ";
+            }
+        }
     }
 }
