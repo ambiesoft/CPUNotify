@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -23,7 +24,7 @@ namespace CPUNotify
         static readonly string KEY_MAX_CPUUSAGE = "MaxCpuUsage";
 
         static readonly string SECTION_LOCATION = "Location";
-
+        private readonly bool _start;
         float? _minCPUUsage;
         float? _maxCPUUsage;
         int? _checkDuration;
@@ -59,6 +60,7 @@ namespace CPUNotify
 
             try
             {
+                bool start = false;
                 var p = new OptionSet();
                 p.Add("v|version", "Show Version", dummy =>
                 {
@@ -79,10 +81,27 @@ namespace CPUNotify
                 });
                 p.Add("h|H|help|?", "Show Help", dummy =>
                 {
-                    p.WriteOptionDescriptions(Console.Out);
+                    var stream = new MemoryStream();
+                    var to = new StreamWriter(stream);
+                    p.WriteOptionDescriptions(to);
+                    to.Flush();
+                    stream.Position = 0;
+                    var reader = new StreamReader(stream);
+                    string message = reader.ReadToEnd();
+
+                    MessageBox.Show(message,
+                        Application.ProductName + " v" + AmbLib.getAssemblyVersion(Assembly.GetExecutingAssembly(),3),
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    Environment.Exit(0);
+                });
+                p.Add("start", "Start without showing the dialog", dummy =>
+                {
+                    start = true;
                 });
 
                 List<string> mainArgs = p.Parse(args);
+                _start = start;
                 if (mainArgs.Count != 0)
                 {
                     FatalExit("Uknown Option:" + string.Join(" ", mainArgs.ToArray()));
@@ -96,9 +115,8 @@ namespace CPUNotify
         }
 
         void OnAfterLoad(object sender, EventArgs e)
-        {            // check options
-            //if ((_minCPUUsage == null && _maxCPUUsage == null) ||
-            //    _checkDuration == null)
+        {
+            if (!_start)
             {
                 using (var form = new FormNewInput())
                 {
@@ -115,30 +133,28 @@ namespace CPUNotify
                     Profile.WriteInt(SECTION_OPTION, KEY_CHECKDURATION, form.Duration, ini);
                     Profile.WriteFloat(SECTION_OPTION, KEY_MIN_CPUUSAGE, form.MinCpuUsage, ini);
                     Profile.WriteFloat(SECTION_OPTION, KEY_MAX_CPUUSAGE, form.MaxCpuUsage, ini);
-                    if(!Profile.WriteAll(ini,IniPath))
+                    if (!Profile.WriteAll(ini, IniPath))
                     {
                         MessageBox.Show("failed to save ini");
                     }
                 }
             }
+
             if (_minCPUUsage == null)
                 _minCPUUsage = 0;
             if (_maxCPUUsage == null)
                 _maxCPUUsage = 100;
 
-
-            txtCheckRange.Text = string.Format("{0} <= [Usage] <= {1}",
+           txtCheckRange.Text = string.Format("{0} <= [Usage] <= {1}",
                 _minCPUUsage, _maxCPUUsage);
 
             _cpuCounter.CategoryName = "Processor";
             _cpuCounter.CounterName = "% Processor Time";
             _cpuCounter.InstanceName = "_Total";
-            // will always start at 0
             _cpuCounter.NextValue();
 
             timerMain.Interval = _timerInterval;
             timerMain.Enabled = true;
-
         }
 
         private void FormMain_Load(object sender, EventArgs e)

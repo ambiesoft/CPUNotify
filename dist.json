@@ -1,0 +1,38 @@
+{
+	"name": "CPUNotify",
+	"solution": "CPUNotify.sln",
+	"targetproject": "zzzDist",
+	"configuration": "Release",
+    "targets": [
+            {
+            	"setoutdirforbuild": true,
+                "outdir" : "build/CPUNotify/",
+                "platform":"Any CPU"
+            }
+    ],
+    "archivedir": "C:/Linkout/",
+    "remotedir": "http://ambiesoft.fam.cx/ffdav/uploads/CPUNotify/",
+    "remotesha1" : "http://ambiesoft.fam.cx/ffdav/uploads/getSha1.php?file=CPUNotify/{}",
+    
+    "TotalFileCount": "exact",
+    
+    "ShouldNotBeFiles": [
+    	"CPUNotify.ini"
+    ],
+    
+    "ShouldBeFiles": [
+        "Ambiesoft.AmbLib.dll",
+        "Ambiesoft.AmbLib.pdb",
+        "Ambiesoft.Profile.dll",
+        "Ambiesoft.Profile.pdb",
+        "CPUNotify.exe",
+        "CPUNotify.pdb",
+        "NDesk.Options.dll",
+        "history.txt"
+    ],
+    
+    "ShouldBeOneOfThem": [],
+    
+    "obtainverfrom": "History.txt",
+    "obtainverregex": "\\d+\\.\\d+\\.\\d+"
+}

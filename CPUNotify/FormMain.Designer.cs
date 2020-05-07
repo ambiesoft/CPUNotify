@@ -116,9 +116,9 @@
             // 
             // btnBrowseApp
             // 
-            this.btnBrowseApp.Location = new System.Drawing.Point(482, 182);
+            this.btnBrowseApp.Location = new System.Drawing.Point(509, 182);
             this.btnBrowseApp.Name = "btnBrowseApp";
-            this.btnBrowseApp.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowseApp.Size = new System.Drawing.Size(36, 23);
             this.btnBrowseApp.TabIndex = 8;
             this.btnBrowseApp.Text = "&...";
             this.btnBrowseApp.UseVisualStyleBackColor = true;
@@ -126,9 +126,9 @@
             // 
             // btnBrowseArg
             // 
-            this.btnBrowseArg.Location = new System.Drawing.Point(470, 229);
+            this.btnBrowseArg.Location = new System.Drawing.Point(509, 229);
             this.btnBrowseArg.Name = "btnBrowseArg";
-            this.btnBrowseArg.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowseArg.Size = new System.Drawing.Size(36, 23);
             this.btnBrowseArg.TabIndex = 9;
             this.btnBrowseArg.Text = "&...";
             this.btnBrowseArg.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@
             // 
             // btnTestLaunch
             // 
-            this.btnTestLaunch.Location = new System.Drawing.Point(100, 273);
+            this.btnTestLaunch.Location = new System.Drawing.Point(23, 271);
             this.btnTestLaunch.Name = "btnTestLaunch";
             this.btnTestLaunch.Size = new System.Drawing.Size(128, 23);
             this.btnTestLaunch.TabIndex = 10;
