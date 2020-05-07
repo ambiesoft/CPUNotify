@@ -28,7 +28,9 @@
         "CPUNotify.exe",
         "CPUNotify.pdb",
         "NDesk.Options.dll",
-        "history.txt"
+        "history.txt",
+        "README.md",
+        "LICENSE"
     ],
     
     "ShouldBeOneOfThem": [],

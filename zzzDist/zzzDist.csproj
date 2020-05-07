@@ -47,6 +47,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(SolutionDir)CPUNotify\dist\history.txt" "$(TargetDir)"
+copy "$(SolutionDir)README.md" "$(TargetDir)"
+copy "$(SolutionDir)LICENSE" "$(TargetDir)"
 del "$(TargetDir)zzzDist.*"
 </PostBuildEvent>
   </PropertyGroup>
