@@ -36,8 +36,8 @@
             this.txtArg = new System.Windows.Forms.TextBox();
             this.lblApp = new System.Windows.Forms.Label();
             this.lblArg = new System.Windows.Forms.Label();
-            this.lblCheckRange = new System.Windows.Forms.Label();
-            this.txtCheckRange = new System.Windows.Forms.TextBox();
+            this.lblRangeAndDuration = new System.Windows.Forms.Label();
+            this.txtRangeAndDuration = new System.Windows.Forms.TextBox();
             this.btnBrowseApp = new System.Windows.Forms.Button();
             this.btnBrowseArg = new System.Windows.Forms.Button();
             this.btnTestLaunch = new System.Windows.Forms.Button();
@@ -97,22 +97,22 @@
             this.lblArg.TabIndex = 5;
             this.lblArg.Text = "Ar&g:";
             // 
-            // lblCheckRange
+            // lblRangeAndDuration
             // 
-            this.lblCheckRange.AutoSize = true;
-            this.lblCheckRange.Location = new System.Drawing.Point(14, 48);
-            this.lblCheckRange.Name = "lblCheckRange";
-            this.lblCheckRange.Size = new System.Drawing.Size(76, 13);
-            this.lblCheckRange.TabIndex = 6;
-            this.lblCheckRange.Text = "&Check Range:";
+            this.lblRangeAndDuration.AutoSize = true;
+            this.lblRangeAndDuration.Location = new System.Drawing.Point(14, 48);
+            this.lblRangeAndDuration.Name = "lblRangeAndDuration";
+            this.lblRangeAndDuration.Size = new System.Drawing.Size(103, 13);
+            this.lblRangeAndDuration.TabIndex = 6;
+            this.lblRangeAndDuration.Text = "&Range and Duration";
             // 
             // txtCheckRange
             // 
-            this.txtCheckRange.Location = new System.Drawing.Point(17, 64);
-            this.txtCheckRange.Name = "txtCheckRange";
-            this.txtCheckRange.ReadOnly = true;
-            this.txtCheckRange.Size = new System.Drawing.Size(486, 20);
-            this.txtCheckRange.TabIndex = 7;
+            this.txtRangeAndDuration.Location = new System.Drawing.Point(17, 64);
+            this.txtRangeAndDuration.Name = "txtCheckRange";
+            this.txtRangeAndDuration.ReadOnly = true;
+            this.txtRangeAndDuration.Size = new System.Drawing.Size(486, 20);
+            this.txtRangeAndDuration.TabIndex = 7;
             // 
             // btnBrowseApp
             // 
@@ -163,8 +163,8 @@
             this.Controls.Add(this.btnTestLaunch);
             this.Controls.Add(this.btnBrowseArg);
             this.Controls.Add(this.btnBrowseApp);
-            this.Controls.Add(this.txtCheckRange);
-            this.Controls.Add(this.lblCheckRange);
+            this.Controls.Add(this.txtRangeAndDuration);
+            this.Controls.Add(this.lblRangeAndDuration);
             this.Controls.Add(this.lblArg);
             this.Controls.Add(this.lblApp);
             this.Controls.Add(this.txtArg);
@@ -189,8 +189,8 @@
         private System.Windows.Forms.TextBox txtArg;
         private System.Windows.Forms.Label lblApp;
         private System.Windows.Forms.Label lblArg;
-        private System.Windows.Forms.Label lblCheckRange;
-        private System.Windows.Forms.TextBox txtCheckRange;
+        private System.Windows.Forms.Label lblRangeAndDuration;
+        private System.Windows.Forms.TextBox txtRangeAndDuration;
         private System.Windows.Forms.Button btnBrowseApp;
         private System.Windows.Forms.Button btnBrowseArg;
         private System.Windows.Forms.Button btnTestLaunch;

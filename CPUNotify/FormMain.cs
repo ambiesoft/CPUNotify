@@ -22,12 +22,14 @@ namespace CPUNotify
         static readonly string KEY_CHECKDURATION = "CheckDuration";
         static readonly string KEY_MIN_CPUUSAGE = "MinCpuUsage";
         static readonly string KEY_MAX_CPUUSAGE = "MaxCpuUsage";
+        static readonly string KEY_IS_AVERAGE = "IsAverage";
 
         static readonly string SECTION_LOCATION = "Location";
         private readonly bool _start;
         float? _minCPUUsage;
         float? _maxCPUUsage;
         int? _checkDuration;
+        bool _isAverage;
 
         int _totalHits = 0;
         int _timerInterval = 1 * 1000;
@@ -56,7 +58,10 @@ namespace CPUNotify
                 _minCPUUsage = fval;
             if (Profile.GetFloat(SECTION_OPTION, KEY_MAX_CPUUSAGE, 0, out fval, ini))
                 _maxCPUUsage = fval;
-
+            
+            bool bval;
+            if (Profile.GetBool(SECTION_OPTION, KEY_IS_AVERAGE, false, out bval, ini))
+                _isAverage = bval;
 
             try
             {
@@ -78,6 +83,10 @@ namespace CPUNotify
                 p.Add("d=|duration=", "Duration of checking", duration =>
                 {
                     _checkDuration = int.Parse(duration);
+                });
+                p.Add("a|average", "Use average", dummy =>
+                {
+                    _isAverage = true;
                 });
                 p.Add("h|H|help|?", "Show Help", dummy =>
                 {
@@ -109,8 +118,7 @@ namespace CPUNotify
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                Environment.Exit(1);
+                FatalExit(ex.Message);
             }
         }
 
@@ -123,16 +131,21 @@ namespace CPUNotify
                     form.MinCpuUsage = _minCPUUsage ?? 0;
                     form.MaxCpuUsage = _maxCPUUsage ?? 100;
                     form.Duration = _checkDuration ?? 0;
+                    form.IsAverage = _isAverage;
+                    
                     if (DialogResult.OK != form.ShowDialog())
                         Environment.Exit(0);
                     _minCPUUsage = form.MinCpuUsage;
                     _maxCPUUsage = form.MaxCpuUsage;
                     _checkDuration = form.Duration;
+                    _isAverage = form.IsAverage;
 
                     HashIni ini = Profile.ReadAll(IniPath);
                     Profile.WriteInt(SECTION_OPTION, KEY_CHECKDURATION, form.Duration, ini);
                     Profile.WriteFloat(SECTION_OPTION, KEY_MIN_CPUUSAGE, form.MinCpuUsage, ini);
                     Profile.WriteFloat(SECTION_OPTION, KEY_MAX_CPUUSAGE, form.MaxCpuUsage, ini);
+                    Profile.WriteBool(SECTION_OPTION, KEY_IS_AVERAGE, form.IsAverage, ini);
+
                     if (!Profile.WriteAll(ini, IniPath))
                     {
                         MessageBox.Show("failed to save ini");
@@ -145,8 +158,8 @@ namespace CPUNotify
             if (_maxCPUUsage == null)
                 _maxCPUUsage = 100;
 
-           txtCheckRange.Text = string.Format("{0} <= [Usage] <= {1}",
-                _minCPUUsage, _maxCPUUsage);
+           txtRangeAndDuration.Text = string.Format("{0} <= [Usage] <= {1} | {2} seconds",
+                _minCPUUsage, _maxCPUUsage, _checkDuration);
 
             _cpuCounter.CategoryName = "Processor";
             _cpuCounter.CounterName = "% Processor Time";
@@ -173,7 +186,7 @@ namespace CPUNotify
         }
         void FatalExit(string message, bool bExit)
         {
-            MessageBox.Show(message);
+            CppUtils.Alert(message);
             if(bExit)
                 Environment.Exit(1);
         }
@@ -188,6 +201,17 @@ namespace CPUNotify
             return _cpuCounter.NextValue();
         }
 
+        Queue<float> usageHistory = new Queue<float>();
+        float calculateAverage()
+        {
+            if (usageHistory.Count == 0)
+                return 0;
+            float ret = 0;
+            foreach (float f in usageHistory)
+                ret += f;
+            return ret / usageHistory.Count;
+        }
+
         private void timerMain_Tick(object sender, EventArgs e)
         {
             if (IsPaused())
@@ -195,21 +219,41 @@ namespace CPUNotify
 
             float cpuPercent = getCPUCounter();
 
-            txtCpuUsage.Text = string.Format("{0} Hits in consecutive {1} secs, current cpu '{2}%'",
-                _totalHits, _checkDuration, cpuPercent);
-
-            if (_minCPUUsage <= cpuPercent && cpuPercent <= _maxCPUUsage)
+            if (_isAverage)
             {
-                _totalHits++;
-                if (_totalHits == _checkDuration)
+                if (usageHistory.Count >= _checkDuration)
+                    usageHistory.Dequeue();
+                usageHistory.Enqueue(cpuPercent);
+
+                float calcedAverage = calculateAverage();
+                txtCpuUsage.Text = string.Format("'{0}%' in average for last {1} secs, current usage '{2}%'",
+                    calcedAverage, usageHistory.Count, cpuPercent);
+
+                if(usageHistory.Count >= _checkDuration)
                 {
-                    LaunchApp(true);
-                    Close();
+                    if(_minCPUUsage <= calcedAverage && calcedAverage <= _maxCPUUsage)
+                    {
+                        LaunchApp(true);
+                    }
                 }
             }
             else
             {
-                _totalHits = 0;
+                txtCpuUsage.Text = string.Format("{0} Hits in consecutive {1} secs, current cpu '{2}%'",
+                    _totalHits, _checkDuration, cpuPercent);
+
+                if (_minCPUUsage <= cpuPercent && cpuPercent <= _maxCPUUsage)
+                {
+                    _totalHits++;
+                    if (_totalHits == _checkDuration)
+                    {
+                        LaunchApp(true);
+                    }
+                }
+                else
+                {
+                    _totalHits = 0;
+                }
             }
         }
 
@@ -266,6 +310,11 @@ namespace CPUNotify
 
         void LaunchApp(bool bExit)
         {
+            if (bExit)
+            {
+                timerMain.Enabled = false;
+            }
+             
             try
             {
                 if (!string.IsNullOrEmpty(txtApp.Text) && !string.IsNullOrEmpty(txtArg.Text))
@@ -277,6 +326,10 @@ namespace CPUNotify
             catch (Exception ex)
             {
                 FatalExit(ex.Message, bExit);
+            }
+            if (bExit)
+            {
+                Close();
             }
         }
         private void btnTestLaunch_Click(object sender, EventArgs e)

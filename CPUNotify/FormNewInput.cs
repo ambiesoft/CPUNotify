@@ -14,6 +14,7 @@ namespace CPUNotify
         public FormNewInput()
         {
             InitializeComponent();
+            UpdateDialog();
         }
 
         internal float MinCpuUsage
@@ -32,7 +33,11 @@ namespace CPUNotify
             get { return Decimal.ToInt32(udDuration.Value); }
             set { udDuration.Value = (decimal)value; }
         }
-
+        internal bool IsAverage
+        {
+            get { return chkAverage.Checked; }
+            set { chkAverage.Checked = value; }
+        }
         private void btnOK_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
@@ -52,6 +57,47 @@ namespace CPUNotify
                 return;
             }
             this.DialogResult = DialogResult.OK;
+        }
+
+        private void chkAverage_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateDialog();
+        }
+        void UpdateDialog()
+        {
+            string message = string.Format("If the cpu usage hits ({0} <= usage <= {1}) {2} for {3} seconds,",
+                MinCpuUsage, MaxCpuUsage, IsAverage ? "in average" : "consecutively", Duration);
+            txtExplanation.Text = message;
+        }
+
+        private void udMin_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateDialog();
+        }
+
+        private void udMax_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateDialog();
+        }
+
+        private void udDuration_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateDialog();
+        }
+
+        private void udDuration_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateDialog();
+        }
+
+        private void udMax_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateDialog();
+        }
+
+        private void udMin_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateDialog();
         }
     }
 }
