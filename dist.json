@@ -25,6 +25,8 @@
         "Ambiesoft.AmbLib.pdb",
         "Ambiesoft.Profile.dll",
         "Ambiesoft.Profile.pdb",
+        "Ambiesoft.AmbLibcpp.pdb",
+        "Ambiesoft.AmbLibcpp.dll",
         "CPUNotify.exe",
         "CPUNotify.pdb",
         "NDesk.Options.dll",
