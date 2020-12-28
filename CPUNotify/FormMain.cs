@@ -168,6 +168,8 @@ namespace CPUNotify
 
             timerMain.Interval = _timerInterval;
             timerMain.Enabled = true;
+
+            SetStarted();
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -345,18 +347,47 @@ namespace CPUNotify
         {
             return btnPause.Tag is bool ? ((bool)(btnPause.Tag)) : false;
         }
+
+        void SetTitle()
+        {
+            this.Text = string.Format("{0} - {1}",
+                IsPaused() ? Properties.Resources.TITLE_PAUSED : Properties.Resources.TITLE_WATCHING,
+                Application.ProductName);
+        }
+        void SetPaused()
+        {
+            btnPause.Tag = true;
+            btnPause.Text = Properties.Resources.START;
+            SetTitle();
+        }
+        void SetStarted()
+        {
+            btnPause.Tag = false;
+            btnPause.Text = Properties.Resources.PAUSE;
+            SetTitle();
+        }
         void TogglePause()
         {
             if (IsPaused())
             {
-                btnPause.Tag = false;
-                btnPause.Text = " | | ";
+                SetStarted();
             }
             else
             {
-                btnPause.Tag = true;
-                btnPause.Text = " > ";
+                SetPaused();
             }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            CppUtils.Info(string.Format("{0} {1}",
+                Application.ProductName,
+                AmbLib.getAssemblyVersion(Assembly.GetExecutingAssembly(), 3)));
         }
     }
 }
