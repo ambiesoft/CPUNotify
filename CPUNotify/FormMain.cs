@@ -17,8 +17,6 @@ namespace CPUNotify
     public partial class FormMain : Form
     {
         static readonly string SECTION_OPTION = "Option";
-        static readonly string KEY_APP = "App";
-        static readonly string KEY_ARG = "Arg";
         static readonly string KEY_CHECKDURATION = "CheckDuration";
         static readonly string KEY_MIN_CPUUSAGE = "MinCpuUsage";
         static readonly string KEY_MAX_CPUUSAGE = "MaxCpuUsage";
@@ -34,6 +32,10 @@ namespace CPUNotify
         int _totalHits = 0;
         int _timerInterval = 1 * 1000;
         PerformanceCounter _cpuCounter = new PerformanceCounter();
+
+        Ambiesoft.AfterFinish.OptionDialog afterFinishDialog_ = 
+            new Ambiesoft.AfterFinish.OptionDialog(true, false, true, true);
+
         public FormMain(string[] args)
         {
             InitializeComponent();
@@ -42,11 +44,6 @@ namespace CPUNotify
 
             // read ini
             HashIni ini = Profile.ReadAll(IniPath);
-            string svalue;
-            Profile.GetString(SECTION_OPTION, KEY_APP, string.Empty, out svalue, ini);
-            txtApp.Text = svalue;
-            Profile.GetString(SECTION_OPTION, KEY_ARG, string.Empty, out svalue, ini);
-            txtArg.Text = svalue;
 
             AmbLib.LoadFormXYWH(this, SECTION_LOCATION, ini);
 
@@ -175,6 +172,10 @@ namespace CPUNotify
         private void FormMain_Load(object sender, EventArgs e)
         {
             this.BeginInvoke(new EventHandler(OnAfterLoad));
+
+            HashIni ini = Profile.ReadAll(IniPath);
+            afterFinishDialog_.LoadValues("AfterFinish", ini);
+            txtNotification.Text = afterFinishDialog_.ToDescription();
         }
 
         string IniPath
@@ -263,50 +264,12 @@ namespace CPUNotify
         {
             string iniPath = IniPath;
             HashIni ini = Profile.ReadAll(iniPath);
-            Profile.WriteString(SECTION_OPTION, KEY_APP, txtApp.Text, ini);
-            Profile.WriteString(SECTION_OPTION, KEY_ARG, txtArg.Text, ini);
 
             AmbLib.SaveFormXYWH(this, SECTION_LOCATION, ini);
 
             if (!Profile.WriteAll(ini,iniPath))
             {
                 MessageBox.Show("ini save failed");
-            }
-        }
-
-        private void btnBrowseApp_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog dlg = new OpenFileDialog())
-            {
-                dlg.Title = "title";
-                dlg.DefaultExt = "exe";
-                StringBuilder sbFilter = new StringBuilder();
-                sbFilter.Append("Application");
-                sbFilter.Append(" ");
-                sbFilter.Append("(*");
-                sbFilter.Append(".exe");
-                sbFilter.Append(")|*");
-                sbFilter.Append(".exe");
-                sbFilter.Append("|");
-                sbFilter.Append("All Files (*.*)|*.*");
-
-                dlg.Filter = sbFilter.ToString();
-                if (DialogResult.OK != dlg.ShowDialog())
-                    return;
-
-                txtApp.Text = dlg.FileName;
-            }
-        }
-
-        private void btnBrowseArg_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog dlg = new OpenFileDialog())
-            {
-                dlg.Title = "title";
-                if (DialogResult.OK != dlg.ShowDialog())
-                    return;
-
-                txtArg.Text = dlg.FileName;
             }
         }
 
@@ -319,11 +282,9 @@ namespace CPUNotify
              
             try
             {
-                if (!string.IsNullOrEmpty(txtApp.Text) && !string.IsNullOrEmpty(txtArg.Text))
-                    Process.Start(txtApp.Text, txtArg.Text);
-                else
-                    Process.Start(!string.IsNullOrEmpty(txtApp.Text) ?
-                        txtApp.Text : txtArg.Text);
+                HashIni ini = Profile.ReadAll(IniPath);
+                afterFinishDialog_.LoadValues("AfterFinish", ini);
+                afterFinishDialog_.DoNotify();
             }
             catch (Exception ex)
             {
@@ -388,6 +349,20 @@ namespace CPUNotify
             CppUtils.Info(string.Format("{0} {1}",
                 Application.ProductName,
                 AmbLib.getAssemblyVersion(Assembly.GetExecutingAssembly(), 3)));
+        }
+
+        private void btnEditNotification_Click(object sender, EventArgs e)
+        {
+            HashIni ini = Profile.ReadAll(IniPath);
+            afterFinishDialog_.LoadValues("AfterFinish", ini);
+            if (DialogResult.OK != afterFinishDialog_.ShowDialog())
+                return;
+            txtNotification.Text = afterFinishDialog_.ToDescription();
+            afterFinishDialog_.SaveValues("AfterFinish", ini);
+            if(!Profile.WriteAll(ini,IniPath))
+            {
+                CppUtils.Alert("Failed to save ini");
+            }
         }
     }
 }

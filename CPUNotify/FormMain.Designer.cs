@@ -33,18 +33,15 @@
             this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.lblCPU = new System.Windows.Forms.Label();
             this.txtCpuUsage = new System.Windows.Forms.TextBox();
-            this.txtApp = new System.Windows.Forms.TextBox();
-            this.txtArg = new System.Windows.Forms.TextBox();
-            this.lblApp = new System.Windows.Forms.Label();
-            this.lblArg = new System.Windows.Forms.Label();
             this.lblRangeAndDuration = new System.Windows.Forms.Label();
             this.txtRangeAndDuration = new System.Windows.Forms.TextBox();
-            this.btnBrowseApp = new System.Windows.Forms.Button();
-            this.btnBrowseArg = new System.Windows.Forms.Button();
             this.btnTestLaunch = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
+            this.lblNotification = new System.Windows.Forms.Label();
+            this.txtNotification = new System.Windows.Forms.TextBox();
+            this.btnEditNotification = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // timerMain
@@ -62,43 +59,13 @@
             // 
             // txtCpuUsage
             // 
+            this.txtCpuUsage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCpuUsage.Location = new System.Drawing.Point(15, 25);
             this.txtCpuUsage.Name = "txtCpuUsage";
             this.txtCpuUsage.ReadOnly = true;
-            this.txtCpuUsage.Size = new System.Drawing.Size(488, 20);
+            this.txtCpuUsage.Size = new System.Drawing.Size(530, 20);
             this.txtCpuUsage.TabIndex = 1;
-            // 
-            // txtApp
-            // 
-            this.txtApp.Location = new System.Drawing.Point(15, 185);
-            this.txtApp.Name = "txtApp";
-            this.txtApp.Size = new System.Drawing.Size(488, 20);
-            this.txtApp.TabIndex = 2;
-            // 
-            // txtArg
-            // 
-            this.txtArg.Location = new System.Drawing.Point(15, 229);
-            this.txtArg.Name = "txtArg";
-            this.txtArg.Size = new System.Drawing.Size(488, 20);
-            this.txtArg.TabIndex = 3;
-            // 
-            // lblApp
-            // 
-            this.lblApp.AutoSize = true;
-            this.lblApp.Location = new System.Drawing.Point(12, 169);
-            this.lblApp.Name = "lblApp";
-            this.lblApp.Size = new System.Drawing.Size(29, 13);
-            this.lblApp.TabIndex = 4;
-            this.lblApp.Text = "&App:";
-            // 
-            // lblArg
-            // 
-            this.lblArg.AutoSize = true;
-            this.lblArg.Location = new System.Drawing.Point(12, 213);
-            this.lblArg.Name = "lblArg";
-            this.lblArg.Size = new System.Drawing.Size(26, 13);
-            this.lblArg.TabIndex = 5;
-            this.lblArg.Text = "Ar&g:";
             // 
             // lblRangeAndDuration
             // 
@@ -111,35 +78,17 @@
             // 
             // txtRangeAndDuration
             // 
+            this.txtRangeAndDuration.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRangeAndDuration.Location = new System.Drawing.Point(15, 64);
             this.txtRangeAndDuration.Name = "txtRangeAndDuration";
             this.txtRangeAndDuration.ReadOnly = true;
-            this.txtRangeAndDuration.Size = new System.Drawing.Size(488, 20);
+            this.txtRangeAndDuration.Size = new System.Drawing.Size(530, 20);
             this.txtRangeAndDuration.TabIndex = 7;
-            // 
-            // btnBrowseApp
-            // 
-            this.btnBrowseApp.Location = new System.Drawing.Point(509, 185);
-            this.btnBrowseApp.Name = "btnBrowseApp";
-            this.btnBrowseApp.Size = new System.Drawing.Size(36, 20);
-            this.btnBrowseApp.TabIndex = 8;
-            this.btnBrowseApp.Text = "&...";
-            this.btnBrowseApp.UseVisualStyleBackColor = true;
-            this.btnBrowseApp.Click += new System.EventHandler(this.btnBrowseApp_Click);
-            // 
-            // btnBrowseArg
-            // 
-            this.btnBrowseArg.Location = new System.Drawing.Point(509, 229);
-            this.btnBrowseArg.Name = "btnBrowseArg";
-            this.btnBrowseArg.Size = new System.Drawing.Size(36, 20);
-            this.btnBrowseArg.TabIndex = 9;
-            this.btnBrowseArg.Text = "&...";
-            this.btnBrowseArg.UseVisualStyleBackColor = true;
-            this.btnBrowseArg.Click += new System.EventHandler(this.btnBrowseArg_Click);
             // 
             // btnTestLaunch
             // 
-            this.btnTestLaunch.Location = new System.Drawing.Point(417, 258);
+            this.btnTestLaunch.Location = new System.Drawing.Point(15, 296);
             this.btnTestLaunch.Name = "btnTestLaunch";
             this.btnTestLaunch.Size = new System.Drawing.Size(128, 23);
             this.btnTestLaunch.TabIndex = 10;
@@ -149,9 +98,11 @@
             // 
             // btnPause
             // 
-            this.btnPause.Location = new System.Drawing.Point(15, 103);
+            this.btnPause.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPause.Location = new System.Drawing.Point(15, 108);
             this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(488, 23);
+            this.btnPause.Size = new System.Drawing.Size(530, 23);
             this.btnPause.TabIndex = 11;
             this.btnPause.UseVisualStyleBackColor = true;
             this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
@@ -160,7 +111,7 @@
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(417, 307);
+            this.btnClose.Location = new System.Drawing.Point(417, 352);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(128, 31);
             this.btnClose.TabIndex = 12;
@@ -170,36 +121,65 @@
             // 
             // btnAbout
             // 
-            this.btnAbout.Location = new System.Drawing.Point(15, 307);
+            this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAbout.Location = new System.Drawing.Point(15, 352);
             this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(109, 31);
+            this.btnAbout.Size = new System.Drawing.Size(128, 31);
             this.btnAbout.TabIndex = 13;
             this.btnAbout.Text = "&About";
             this.btnAbout.UseVisualStyleBackColor = true;
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
+            // lblNotification
+            // 
+            this.lblNotification.AutoSize = true;
+            this.lblNotification.Location = new System.Drawing.Point(12, 152);
+            this.lblNotification.Name = "lblNotification";
+            this.lblNotification.Size = new System.Drawing.Size(60, 13);
+            this.lblNotification.TabIndex = 14;
+            this.lblNotification.Text = "&Notification";
+            // 
+            // txtNotification
+            // 
+            this.txtNotification.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNotification.Enabled = false;
+            this.txtNotification.Location = new System.Drawing.Point(15, 168);
+            this.txtNotification.Multiline = true;
+            this.txtNotification.Name = "txtNotification";
+            this.txtNotification.Size = new System.Drawing.Size(530, 122);
+            this.txtNotification.TabIndex = 15;
+            // 
+            // btnEditNotification
+            // 
+            this.btnEditNotification.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditNotification.Location = new System.Drawing.Point(417, 296);
+            this.btnEditNotification.Name = "btnEditNotification";
+            this.btnEditNotification.Size = new System.Drawing.Size(128, 23);
+            this.btnEditNotification.TabIndex = 16;
+            this.btnEditNotification.Text = "&Edit";
+            this.btnEditNotification.UseVisualStyleBackColor = true;
+            this.btnEditNotification.Click += new System.EventHandler(this.btnEditNotification_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(557, 350);
+            this.ClientSize = new System.Drawing.Size(557, 395);
+            this.Controls.Add(this.btnEditNotification);
+            this.Controls.Add(this.txtNotification);
+            this.Controls.Add(this.lblNotification);
             this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnPause);
             this.Controls.Add(this.btnTestLaunch);
-            this.Controls.Add(this.btnBrowseArg);
-            this.Controls.Add(this.btnBrowseApp);
             this.Controls.Add(this.txtRangeAndDuration);
             this.Controls.Add(this.lblRangeAndDuration);
-            this.Controls.Add(this.lblArg);
-            this.Controls.Add(this.lblApp);
-            this.Controls.Add(this.txtArg);
-            this.Controls.Add(this.txtApp);
             this.Controls.Add(this.txtCpuUsage);
             this.Controls.Add(this.lblCPU);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(573, 389);
+            this.MinimumSize = new System.Drawing.Size(573, 434);
             this.Name = "FormMain";
             this.Text = "CPUNotify";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
@@ -214,18 +194,15 @@
         private System.Windows.Forms.Timer timerMain;
         private System.Windows.Forms.Label lblCPU;
         private System.Windows.Forms.TextBox txtCpuUsage;
-        private System.Windows.Forms.TextBox txtApp;
-        private System.Windows.Forms.TextBox txtArg;
-        private System.Windows.Forms.Label lblApp;
-        private System.Windows.Forms.Label lblArg;
         private System.Windows.Forms.Label lblRangeAndDuration;
         private System.Windows.Forms.TextBox txtRangeAndDuration;
-        private System.Windows.Forms.Button btnBrowseApp;
-        private System.Windows.Forms.Button btnBrowseArg;
         private System.Windows.Forms.Button btnTestLaunch;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnAbout;
+        private System.Windows.Forms.Label lblNotification;
+        private System.Windows.Forms.TextBox txtNotification;
+        private System.Windows.Forms.Button btnEditNotification;
     }
 }
 
