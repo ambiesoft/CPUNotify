@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.lblCPU = new System.Windows.Forms.Label();
             this.txtCpuUsage = new System.Windows.Forms.TextBox();
@@ -197,6 +198,7 @@
             this.Controls.Add(this.txtApp);
             this.Controls.Add(this.txtCpuUsage);
             this.Controls.Add(this.lblCPU);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(573, 389);
             this.Name = "FormMain";
             this.Text = "CPUNotify";
