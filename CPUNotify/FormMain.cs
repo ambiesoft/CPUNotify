@@ -119,35 +119,42 @@ namespace CPUNotify
             }
         }
 
+        bool ShowSettingDialog()
+        {
+            using (var form = new FormNewInput())
+            {
+                form.MinCpuUsage = _minCPUUsage ?? 0;
+                form.MaxCpuUsage = _maxCPUUsage ?? 100;
+                form.Duration = _checkDuration ?? 0;
+                form.IsAverage = _isAverage;
+
+                if (DialogResult.OK != form.ShowDialog())
+                    return false;
+
+                _minCPUUsage = form.MinCpuUsage;
+                _maxCPUUsage = form.MaxCpuUsage;
+                _checkDuration = form.Duration;
+                _isAverage = form.IsAverage;
+
+                HashIni ini = Profile.ReadAll(IniPath);
+                Profile.WriteInt(SECTION_OPTION, KEY_CHECKDURATION, form.Duration, ini);
+                Profile.WriteFloat(SECTION_OPTION, KEY_MIN_CPUUSAGE, form.MinCpuUsage, ini);
+                Profile.WriteFloat(SECTION_OPTION, KEY_MAX_CPUUSAGE, form.MaxCpuUsage, ini);
+                Profile.WriteBool(SECTION_OPTION, KEY_IS_AVERAGE, form.IsAverage, ini);
+
+                if (!Profile.WriteAll(ini, IniPath))
+                {
+                    MessageBox.Show("failed to save ini");
+                }
+            }
+            return true;
+        }
+
         void OnAfterLoad(object sender, EventArgs e)
         {
             if (!_start)
             {
-                using (var form = new FormNewInput())
-                {
-                    form.MinCpuUsage = _minCPUUsage ?? 0;
-                    form.MaxCpuUsage = _maxCPUUsage ?? 100;
-                    form.Duration = _checkDuration ?? 0;
-                    form.IsAverage = _isAverage;
-                    
-                    if (DialogResult.OK != form.ShowDialog())
-                        Environment.Exit(0);
-                    _minCPUUsage = form.MinCpuUsage;
-                    _maxCPUUsage = form.MaxCpuUsage;
-                    _checkDuration = form.Duration;
-                    _isAverage = form.IsAverage;
-
-                    HashIni ini = Profile.ReadAll(IniPath);
-                    Profile.WriteInt(SECTION_OPTION, KEY_CHECKDURATION, form.Duration, ini);
-                    Profile.WriteFloat(SECTION_OPTION, KEY_MIN_CPUUSAGE, form.MinCpuUsage, ini);
-                    Profile.WriteFloat(SECTION_OPTION, KEY_MAX_CPUUSAGE, form.MaxCpuUsage, ini);
-                    Profile.WriteBool(SECTION_OPTION, KEY_IS_AVERAGE, form.IsAverage, ini);
-
-                    if (!Profile.WriteAll(ini, IniPath))
-                    {
-                        MessageBox.Show("failed to save ini");
-                    }
-                }
+                ShowSettingDialog();
             }
 
             if (_minCPUUsage == null)
@@ -155,8 +162,9 @@ namespace CPUNotify
             if (_maxCPUUsage == null)
                 _maxCPUUsage = 100;
 
-           txtRangeAndDuration.Text = string.Format("{0} <= [Usage] <= {1} | {2} seconds",
-                _minCPUUsage, _maxCPUUsage, _checkDuration);
+            txtRangeAndDuration.Text = string.Format("{0} <= [{3}] <= {1} | {2} seconds",
+                 _minCPUUsage, _maxCPUUsage, _checkDuration,
+                 _isAverage ? "Average Usage" : "Usage");
 
             _cpuCounter.CategoryName = "Processor";
             _cpuCounter.CounterName = "% Processor Time";
@@ -215,6 +223,12 @@ namespace CPUNotify
             return ret / usageHistory.Count;
         }
 
+        void ClearTickHistory()
+        {
+            usageHistory.Clear();
+            _totalHits = 0;
+        }
+
         private void timerMain_Tick(object sender, EventArgs e)
         {
             if (IsPaused())
@@ -236,7 +250,9 @@ namespace CPUNotify
                 {
                     if(_minCPUUsage <= calcedAverage && calcedAverage <= _maxCPUUsage)
                     {
-                        LaunchApp(true);
+                        LaunchApp();
+                        ClearTickHistory();
+                        SetPaused();
                     }
                 }
             }
@@ -250,7 +266,9 @@ namespace CPUNotify
                     _totalHits++;
                     if (_totalHits == _checkDuration)
                     {
-                        LaunchApp(true);
+                        LaunchApp();
+                        ClearTickHistory();
+                        SetPaused();
                     }
                 }
                 else
@@ -273,13 +291,8 @@ namespace CPUNotify
             }
         }
 
-        void LaunchApp(bool bExit)
+        void LaunchApp()
         {
-            if (bExit)
-            {
-                timerMain.Enabled = false;
-            }
-             
             try
             {
                 HashIni ini = Profile.ReadAll(IniPath);
@@ -288,16 +301,12 @@ namespace CPUNotify
             }
             catch (Exception ex)
             {
-                FatalExit(ex.Message, bExit);
-            }
-            if (bExit)
-            {
-                Close();
+                FatalExit(ex.Message);
             }
         }
         private void btnTestLaunch_Click(object sender, EventArgs e)
         {
-            LaunchApp(false);
+            LaunchApp();
         }
 
         private void btnPause_Click(object sender, EventArgs e)
@@ -362,6 +371,23 @@ namespace CPUNotify
             if(!Profile.WriteAll(ini,IniPath))
             {
                 CppUtils.Alert("Failed to save ini");
+            }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            bool prevPaused = IsPaused();
+            SetPaused();
+            if(!ShowSettingDialog())
+            {
+                if (!prevPaused)
+                    SetStarted();
+                return;
+            }
+            else
+            {
+                ClearTickHistory();
+                SetStarted();
             }
         }
     }
