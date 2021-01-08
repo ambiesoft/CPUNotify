@@ -147,6 +147,7 @@ namespace CPUNotify
                     MessageBox.Show("failed to save ini");
                 }
             }
+            UpdateData();
             return true;
         }
 
@@ -162,9 +163,7 @@ namespace CPUNotify
             if (_maxCPUUsage == null)
                 _maxCPUUsage = 100;
 
-            txtRangeAndDuration.Text = string.Format("{0} <= [{3}] <= {1} | {2} seconds",
-                 _minCPUUsage, _maxCPUUsage, _checkDuration,
-                 _isAverage ? "Average Usage" : "Usage");
+            UpdateData();
 
             _cpuCounter.CategoryName = "Processor";
             _cpuCounter.CounterName = "% Processor Time";
@@ -175,6 +174,13 @@ namespace CPUNotify
             timerMain.Enabled = true;
 
             SetStarted();
+        }
+
+        void UpdateData()
+        {
+            txtRangeAndDuration.Text = string.Format("{0} <= [{3}] <= {1} | {2} seconds",
+                 _minCPUUsage, _maxCPUUsage, _checkDuration,
+                 _isAverage ? "Average Usage" : "Usage");
         }
 
         private void FormMain_Load(object sender, EventArgs e)
