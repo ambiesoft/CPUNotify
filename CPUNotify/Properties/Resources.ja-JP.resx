@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PAUSE" xml:space="preserve">
-    <value>&amp;Pause</value>
+    <value>停止(&amp;P)</value>
   </data>
   <data name="START" xml:space="preserve">
-    <value>&amp;Start</value>
+    <value>開始(&amp;S)</value>
   </data>
   <data name="STR_CPU_USAGE" xml:space="preserve">
-    <value>If the cpu usage hits ({0} &lt;= usage &lt;= {1}) {2} for {3} seconds,</value>
+    <value>CPU使用率が条件 ({0} &lt;= usage &lt;= {1}) で {2} {3} 秒間ヒットしたとき</value>
   </data>
   <data name="TITLE_PAUSED" xml:space="preserve">
-    <value>Paused</value>
+    <value>停止中</value>
   </data>
   <data name="TITLE_WATCHING" xml:space="preserve">
-    <value>Watching</value>
+    <value>監視中</value>
   </data>
 </root>

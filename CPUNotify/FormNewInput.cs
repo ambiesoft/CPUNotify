@@ -65,7 +65,7 @@ namespace CPUNotify
         }
         void UpdateDialog()
         {
-            string message = string.Format("If the cpu usage hits ({0} <= usage <= {1}) {2} for {3} seconds,",
+            string message = string.Format(Properties.Resources.STR_CPU_USAGE,
                 MinCpuUsage, MaxCpuUsage, IsAverage ? "in average" : "consecutively", Duration);
             txtExplanation.Text = message;
         }

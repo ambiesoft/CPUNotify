@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormNewInput));
             this.udMin = new System.Windows.Forms.NumericUpDown();
             this.udMax = new System.Windows.Forms.NumericUpDown();
             this.btnOK = new System.Windows.Forms.Button();
@@ -45,106 +46,74 @@
             // 
             // udMin
             // 
-            this.udMin.Location = new System.Drawing.Point(86, 14);
+            resources.ApplyResources(this.udMin, "udMin");
             this.udMin.Name = "udMin";
-            this.udMin.Size = new System.Drawing.Size(99, 20);
-            this.udMin.TabIndex = 0;
             this.udMin.ValueChanged += new System.EventHandler(this.udMin_ValueChanged);
             this.udMin.KeyUp += new System.Windows.Forms.KeyEventHandler(this.udMin_KeyUp);
             // 
             // udMax
             // 
-            this.udMax.Location = new System.Drawing.Point(86, 41);
+            resources.ApplyResources(this.udMax, "udMax");
             this.udMax.Name = "udMax";
-            this.udMax.Size = new System.Drawing.Size(99, 20);
-            this.udMax.TabIndex = 0;
             this.udMax.ValueChanged += new System.EventHandler(this.udMax_ValueChanged);
             this.udMax.KeyUp += new System.Windows.Forms.KeyEventHandler(this.udMax_KeyUp);
             // 
             // btnOK
             // 
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(311, 131);
+            resources.ApplyResources(this.btnOK, "btnOK");
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 1;
-            this.btnOK.Text = "&OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(392, 131);
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 2;
-            this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // udDuration
             // 
-            this.udDuration.Location = new System.Drawing.Point(86, 66);
+            resources.ApplyResources(this.udDuration, "udDuration");
             this.udDuration.Name = "udDuration";
-            this.udDuration.Size = new System.Drawing.Size(99, 20);
-            this.udDuration.TabIndex = 3;
             this.udDuration.ValueChanged += new System.EventHandler(this.udDuration_ValueChanged);
             this.udDuration.KeyUp += new System.Windows.Forms.KeyEventHandler(this.udDuration_KeyUp);
             // 
             // lblMin
             // 
-            this.lblMin.AutoSize = true;
-            this.lblMin.Location = new System.Drawing.Point(12, 16);
+            resources.ApplyResources(this.lblMin, "lblMin");
             this.lblMin.Name = "lblMin";
-            this.lblMin.Size = new System.Drawing.Size(27, 13);
-            this.lblMin.TabIndex = 4;
-            this.lblMin.Text = "&Min:";
             // 
             // lblMax
             // 
-            this.lblMax.AutoSize = true;
-            this.lblMax.Location = new System.Drawing.Point(12, 43);
+            resources.ApplyResources(this.lblMax, "lblMax");
             this.lblMax.Name = "lblMax";
-            this.lblMax.Size = new System.Drawing.Size(30, 13);
-            this.lblMax.TabIndex = 5;
-            this.lblMax.Text = "Ma&x:";
             // 
             // lblDuration
             // 
-            this.lblDuration.AutoSize = true;
-            this.lblDuration.Location = new System.Drawing.Point(12, 68);
+            resources.ApplyResources(this.lblDuration, "lblDuration");
             this.lblDuration.Name = "lblDuration";
-            this.lblDuration.Size = new System.Drawing.Size(50, 13);
-            this.lblDuration.TabIndex = 6;
-            this.lblDuration.Text = "&Duration:";
             // 
             // chkAverage
             // 
-            this.chkAverage.AutoSize = true;
-            this.chkAverage.Location = new System.Drawing.Point(15, 92);
+            resources.ApplyResources(this.chkAverage, "chkAverage");
             this.chkAverage.Name = "chkAverage";
-            this.chkAverage.Size = new System.Drawing.Size(119, 17);
-            this.chkAverage.TabIndex = 7;
-            this.chkAverage.Text = "&Use Average  Ratio";
             this.chkAverage.UseVisualStyleBackColor = true;
             this.chkAverage.CheckedChanged += new System.EventHandler(this.chkAverage_CheckedChanged);
             // 
             // txtExplanation
             // 
-            this.txtExplanation.Location = new System.Drawing.Point(216, 12);
-            this.txtExplanation.Multiline = true;
+            resources.ApplyResources(this.txtExplanation, "txtExplanation");
             this.txtExplanation.Name = "txtExplanation";
             this.txtExplanation.ReadOnly = true;
-            this.txtExplanation.Size = new System.Drawing.Size(251, 93);
-            this.txtExplanation.TabIndex = 8;
             // 
             // FormNewInput
             // 
             this.AcceptButton = this.btnOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(479, 167);
             this.Controls.Add(this.txtExplanation);
             this.Controls.Add(this.chkAverage);
             this.Controls.Add(this.lblDuration);
@@ -161,8 +130,6 @@
             this.Name = "FormNewInput";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "CPUNotify Condition";
             ((System.ComponentModel.ISupportInitialize)(this.udMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDuration)).EndInit();

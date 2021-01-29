@@ -1,3 +1,5 @@
+i18n
+
 2021/01/29 ver1.0.10
 Added: Stop Sound
 

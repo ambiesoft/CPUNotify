@@ -117,19 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PAUSE" xml:space="preserve">
-    <value>&amp;Pause</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 12</value>
   </data>
-  <data name="START" xml:space="preserve">
-    <value>&amp;Start</value>
+  <data name="lblMin.Text" xml:space="preserve">
+    <value>最小(&amp;M):</value>
   </data>
-  <data name="STR_CPU_USAGE" xml:space="preserve">
-    <value>If the cpu usage hits ({0} &lt;= usage &lt;= {1}) {2} for {3} seconds,</value>
+  <data name="lblMax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 12</value>
   </data>
-  <data name="TITLE_PAUSED" xml:space="preserve">
-    <value>Paused</value>
+  <data name="lblMax.Text" xml:space="preserve">
+    <value>最大(&amp;X):</value>
   </data>
-  <data name="TITLE_WATCHING" xml:space="preserve">
-    <value>Watching</value>
+  <data name="lblDuration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 12</value>
+  </data>
+  <data name="lblDuration.Text" xml:space="preserve">
+    <value>継続(&amp;D):</value>
+  </data>
+  <data name="chkAverage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 16</value>
+  </data>
+  <data name="chkAverage.Text" xml:space="preserve">
+    <value>平均値を使う(&amp;U):</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>CPUNotify 条件</value>
   </data>
 </root>
