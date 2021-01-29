@@ -396,5 +396,10 @@ namespace CPUNotify
                 SetStarted();
             }
         }
+
+        private void btnStopSound_Click(object sender, EventArgs e)
+        {
+            afterFinishDialog_.StopWav();
+        }
     }
 }

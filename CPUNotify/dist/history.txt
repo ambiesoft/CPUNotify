@@ -1,3 +1,6 @@
+2021/01/29 ver1.0.10
+Added: Stop Sound
+
 2021/01/09 ver1.0.9
 Fix: Text of Range and seconds was not updated after Resetting data.
 

@@ -43,6 +43,7 @@
             this.txtNotification = new System.Windows.Forms.TextBox();
             this.btnEditNotification = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.btnStopSound = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // timerMain
@@ -174,12 +175,23 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // btnStopSound
+            // 
+            this.btnStopSound.Location = new System.Drawing.Point(149, 296);
+            this.btnStopSound.Name = "btnStopSound";
+            this.btnStopSound.Size = new System.Drawing.Size(128, 23);
+            this.btnStopSound.TabIndex = 950;
+            this.btnStopSound.Text = "&Stop Sound";
+            this.btnStopSound.UseVisualStyleBackColor = true;
+            this.btnStopSound.Click += new System.EventHandler(this.btnStopSound_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(557, 395);
+            this.Controls.Add(this.btnStopSound);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnEditNotification);
             this.Controls.Add(this.txtNotification);
@@ -218,6 +230,7 @@
         private System.Windows.Forms.TextBox txtNotification;
         private System.Windows.Forms.Button btnEditNotification;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnStopSound;
     }
 }
 
