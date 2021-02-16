@@ -1,4 +1,6 @@
+2021/01/29 ver1.0.11
 i18n
+HighDPI Form
 
 2021/01/29 ver1.0.10
 Added: Stop Sound
