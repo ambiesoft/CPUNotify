@@ -35,6 +35,7 @@
         "NDesk.Options.dll",
         "Ambiesoft.AfterFinish.dll",
         "ja-JP\\Ambiesoft.AfterFinish.resources.dll",
+                "ja-JP\\CPUNotify.resources.dll",
         "Ambiesoft.AfterFinish.pdb",
         "history.txt",
         "README.md",
