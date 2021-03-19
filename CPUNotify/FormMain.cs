@@ -155,7 +155,11 @@ namespace CPUNotify
         {
             if (!_start)
             {
-                ShowSettingDialog();
+                if(!ShowSettingDialog())
+                {
+                    this.Close();
+                    return;
+                }
             }
 
             if (_minCPUUsage == null)
@@ -190,6 +194,9 @@ namespace CPUNotify
             HashIni ini = Profile.ReadAll(IniPath);
             afterFinishDialog_.LoadValues("AfterFinish", ini);
             txtNotification.Text = afterFinishDialog_.ToDescription();
+            FormMain_Resize(this, null);
+            lblTopLeft.Visible = false;
+            lblBottomRight.Visible = false;
         }
 
         string IniPath
@@ -249,7 +256,7 @@ namespace CPUNotify
                 usageHistory.Enqueue(cpuPercent);
 
                 float calcedAverage = calculateAverage();
-                txtCpuUsage.Text = string.Format("'{0}%' in average for last {1} secs, current usage '{2}%'",
+                txtCpuUsage.Text = string.Format(Properties.Resources.STR_PROGRESS_AVERAGE,
                     calcedAverage, usageHistory.Count, cpuPercent);
 
                 if(usageHistory.Count >= _checkDuration)
@@ -264,18 +271,18 @@ namespace CPUNotify
             }
             else
             {
-                txtCpuUsage.Text = string.Format("{0} Hits in consecutive {1} secs, current cpu '{2}%'",
+                txtCpuUsage.Text = string.Format(Properties.Resources.STR_PROGRESS_CONSECUTIVE,
                     _totalHits, _checkDuration, cpuPercent);
 
                 if (_minCPUUsage <= cpuPercent && cpuPercent <= _maxCPUUsage)
                 {
-                    _totalHits++;
                     if (_totalHits == _checkDuration)
                     {
                         LaunchApp();
                         ClearTickHistory();
                         SetPaused();
                     }
+                    _totalHits++;
                 }
                 else
                 {
@@ -400,6 +407,21 @@ namespace CPUNotify
         private void btnStopSound_Click(object sender, EventArgs e)
         {
             afterFinishDialog_.StopWav();
+        }
+
+        private void FormMain_Resize(object sender, EventArgs e)
+        {
+            Point pt = new Point(
+                txtRangeAndDuration.Location.X,
+                lblTopLeft.Location.Y
+                );
+            Size size = new Size(
+                // lblBottomRight.Location.X + lblBottomRight.Size.Width - lblTopLeft.Location.X,
+                txtRangeAndDuration.Size.Width,
+                lblBottomRight.Location.Y + lblBottomRight.Size.Height - lblTopLeft.Location.Y
+                );
+            txtNotification.Location = pt;
+            txtNotification.Size = size;
         }
     }
 }

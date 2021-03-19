@@ -44,6 +44,8 @@
             this.btnEditNotification = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnStopSound = new System.Windows.Forms.Button();
+            this.lblTopLeft = new System.Windows.Forms.Label();
+            this.lblBottomRight = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // timerMain
@@ -132,11 +134,23 @@
             this.btnStopSound.UseVisualStyleBackColor = true;
             this.btnStopSound.Click += new System.EventHandler(this.btnStopSound_Click);
             // 
+            // lblTopLeft
+            // 
+            resources.ApplyResources(this.lblTopLeft, "lblTopLeft");
+            this.lblTopLeft.Name = "lblTopLeft";
+            // 
+            // lblBottomRight
+            // 
+            resources.ApplyResources(this.lblBottomRight, "lblBottomRight");
+            this.lblBottomRight.Name = "lblBottomRight";
+            // 
             // FormMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btnClose;
+            this.Controls.Add(this.lblBottomRight);
+            this.Controls.Add(this.lblTopLeft);
             this.Controls.Add(this.btnStopSound);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnEditNotification);
@@ -153,6 +167,7 @@
             this.Name = "FormMain";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -174,6 +189,8 @@
         private System.Windows.Forms.Button btnEditNotification;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnStopSound;
+        private System.Windows.Forms.Label lblTopLeft;
+        private System.Windows.Forms.Label lblBottomRight;
     }
 }
 

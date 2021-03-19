@@ -79,11 +79,47 @@ namespace CPUNotify.Properties {
         }
         
         /// <summary>
+        ///   consecutively に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string STR_CONSECUTIVELY {
+            get {
+                return ResourceManager.GetString("STR_CONSECUTIVELY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   If the cpu usage hits ({0} &lt;= usage &lt;= {1}) {2} for {3} seconds, に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string STR_CPU_USAGE {
             get {
                 return ResourceManager.GetString("STR_CPU_USAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   in average に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string STR_IN_AVERAGE {
+            get {
+                return ResourceManager.GetString("STR_IN_AVERAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &apos;{0}%&apos; in average for last {1} secs, current usage &apos;{2}%&apos; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string STR_PROGRESS_AVERAGE {
+            get {
+                return ResourceManager.GetString("STR_PROGRESS_AVERAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} Hits in consecutive {1} secs, current cpu &apos;{2}%&apos; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string STR_PROGRESS_CONSECUTIVE {
+            get {
+                return ResourceManager.GetString("STR_PROGRESS_CONSECUTIVE", resourceCulture);
             }
         }
         

@@ -123,8 +123,20 @@
   <data name="START" xml:space="preserve">
     <value>&amp;Start</value>
   </data>
+  <data name="STR_CONSECUTIVELY" xml:space="preserve">
+    <value>consecutively</value>
+  </data>
   <data name="STR_CPU_USAGE" xml:space="preserve">
     <value>If the cpu usage hits ({0} &lt;= usage &lt;= {1}) {2} for {3} seconds,</value>
+  </data>
+  <data name="STR_IN_AVERAGE" xml:space="preserve">
+    <value>in average</value>
+  </data>
+  <data name="STR_PROGRESS_AVERAGE" xml:space="preserve">
+    <value>'{0}%' in average for last {1} secs, current usage '{2}%'</value>
+  </data>
+  <data name="STR_PROGRESS_CONSECUTIVE" xml:space="preserve">
+    <value>{0} Hits in consecutive {1} secs, current cpu '{2}%'</value>
   </data>
   <data name="TITLE_PAUSED" xml:space="preserve">
     <value>Paused</value>

@@ -66,7 +66,9 @@ namespace CPUNotify
         void UpdateDialog()
         {
             string message = string.Format(Properties.Resources.STR_CPU_USAGE,
-                MinCpuUsage, MaxCpuUsage, IsAverage ? "in average" : "consecutively", Duration);
+                MinCpuUsage, MaxCpuUsage, 
+                IsAverage ? Properties.Resources.STR_IN_AVERAGE : Properties.Resources.STR_CONSECUTIVELY,
+                Duration);
             txtExplanation.Text = message;
         }
 

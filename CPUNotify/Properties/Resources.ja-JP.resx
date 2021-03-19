@@ -123,8 +123,20 @@
   <data name="START" xml:space="preserve">
     <value>開始(&amp;S)</value>
   </data>
+  <data name="STR_CONSECUTIVELY" xml:space="preserve">
+    <value>連続</value>
+  </data>
   <data name="STR_CPU_USAGE" xml:space="preserve">
-    <value>CPU使用率が条件 ({0} &lt;= usage &lt;= {1}) で {2} {3} 秒間ヒットしたとき</value>
+    <value>CPU使用率が条件 ({0} &lt;= usage &lt;= {1}) ({2}) で {3} 秒間ヒットしたとき</value>
+  </data>
+  <data name="STR_IN_AVERAGE" xml:space="preserve">
+    <value>平均</value>
+  </data>
+  <data name="STR_PROGRESS_AVERAGE" xml:space="preserve">
+    <value>最近の{1}秒で平均で '{0}%'、現在の使用率 '{2}%'</value>
+  </data>
+  <data name="STR_PROGRESS_CONSECUTIVE" xml:space="preserve">
+    <value>連続 {1} 秒で {0} ヒット、現在の使用率 '{2}%'</value>
   </data>
   <data name="TITLE_PAUSED" xml:space="preserve">
     <value>停止中</value>
