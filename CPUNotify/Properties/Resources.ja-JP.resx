@@ -123,6 +123,9 @@
   <data name="START" xml:space="preserve">
     <value>開始(&amp;S)</value>
   </data>
+  <data name="STR_AVERAGE_USAGE" xml:space="preserve">
+    <value>平均使用率</value>
+  </data>
   <data name="STR_CONSECUTIVELY" xml:space="preserve">
     <value>連続</value>
   </data>
@@ -137,6 +140,12 @@
   </data>
   <data name="STR_PROGRESS_CONSECUTIVE" xml:space="preserve">
     <value>連続 {1} 秒で {0} ヒット、現在の使用率 '{2}%'</value>
+  </data>
+  <data name="STR_SECONDS" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="STR_USAGE" xml:space="preserve">
+    <value>使用率</value>
   </data>
   <data name="TITLE_PAUSED" xml:space="preserve">
     <value>停止中</value>

@@ -182,9 +182,10 @@ namespace CPUNotify
 
         void UpdateData()
         {
-            txtRangeAndDuration.Text = string.Format("{0} <= [{3}] <= {1} | {2} seconds",
+            txtRangeAndDuration.Text = string.Format("{0} <= [{3}] <= {1} | {2} {4}",
                  _minCPUUsage, _maxCPUUsage, _checkDuration,
-                 _isAverage ? "Average Usage" : "Usage");
+                 _isAverage ? Properties.Resources.STR_AVERAGE_USAGE : Properties.Resources.STR_USAGE,
+                 Properties.Resources.STR_SECONDS);
         }
 
         private void FormMain_Load(object sender, EventArgs e)
