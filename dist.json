@@ -11,8 +11,8 @@
             }
     ],
     "archivedir": "C:/Linkout/",
-    "remotedir": "http://ambiesoft.fam.cx/ffdav/uploads/CPUNotify/",
-    "remotesha1" : "http://ambiesoft.fam.cx/ffdav/uploads/getSha1.php?file=CPUNotify/{}",
+    "remotedir": "http://ambiesoft.mooo.com/ffdav/uploads/CPUNotify/",
+    "remotesha1" : "http://ambiesoft.mooo.com/ffdav/uploads/getSha1.php?file=CPUNotify/{}",
     
     "TotalFileCount": "exact",
     
